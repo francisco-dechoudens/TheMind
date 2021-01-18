@@ -6,5 +6,8 @@ namespace TheMind.Models
         public Room()
         {
         }
+
+        public string ShareId { get; set; }
+        public int NoPlayers { get; set; }
     }
 }

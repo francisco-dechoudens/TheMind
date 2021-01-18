@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using TheMind.ViewModels;
 using Xamarin.Forms;
 
 namespace TheMind.Views
@@ -10,6 +10,7 @@ namespace TheMind.Views
         public CreateRoomPage()
         {
             InitializeComponent();
+            BindingContext = new CreateRoomPageViewModel();
         }
     }
 }

@@ -3,8 +3,6 @@ namespace TheMind.Models
 {
     public class Student
     {
-        public Student()
-        {
-        }
+        public string FirstName { get; set; }
     }
 }

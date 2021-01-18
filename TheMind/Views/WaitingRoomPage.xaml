@@ -1,5 +1,55 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TheMind.Views.WaitingRoomPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheMind.Views.WaitingRoomPage"
+             xmlns:behaviors="clr-namespace:TheMind.Behaviors"
+             xmlns:converters="clr-namespace:TheMind.Converters"
+             BackgroundColor="Black">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
+        <StackLayout>
+            <ListView 
+                      ItemsSource="{Binding Players}" 
+                      HasUnevenRows="True"
+                      BackgroundColor="Transparent"
+                      SelectedItem="{Binding SelectedSeat, Mode=TwoWay}"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                              <StackLayout
+                                  Margin="5,5"
+                                  HeightRequest="100" >
+                                    <Frame VerticalOptions="FillAndExpand" HasShadow="False" BackgroundColor="#19FFFFFF" >
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label TextColor="White"
+                                            FontSize="Large"
+                                            VerticalOptions="CenterAndExpand"
+                                            Text="{Binding NickName}" HorizontalOptions="StartAndExpand"/>
+                                            <Button Text="Remove" IsVisible="{Binding IsSeated}" HorizontalOptions="End"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="ItemSelected"
+                                                      Command="{Binding SeatSelectedCommand}"
+                                                      Converter="{StaticResource SelectedItemConverter}" />
+                </ListView.Behaviors>
+            </ListView>
+
+            <Button IsEnabled="{Binding AllPlayerSeated}"
+                    Margin="20"
+                    Text="Start Game"
+                    TextColor="White"
+                    BorderColor="white"
+                    BorderWidth="2"/>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

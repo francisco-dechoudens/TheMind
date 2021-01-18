@@ -1,4 +1,6 @@
 ﻿using System;
+using TheMind.Services;
+using TheMind.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,8 +11,9 @@ namespace TheMind
         public App()
         {
             InitializeComponent();
+            DBClient.Init();
 
-            MainPage = new MainPage();
+            MainPage = new WaitingRoomPage();
         }
 
         protected override void OnStart()

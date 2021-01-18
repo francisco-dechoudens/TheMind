@@ -1,10 +1,12 @@
 ﻿using System;
 namespace TheMind.Models
 {
-    public class Student
+    public class Card
     {
-        public Student()
+        public Card()
         {
         }
+
+        public int Value { get; set; }
     }
 }

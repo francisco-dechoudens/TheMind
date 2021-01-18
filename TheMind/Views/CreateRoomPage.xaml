@@ -1,5 +1,125 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TheMind.Views.CreateRoomPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheMind.Views.CreateRoomPage"
+             BackgroundColor="Black">
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="RadioButtonTemplate">
+            <Frame BorderColor="#F3F2F1"
+                   BackgroundColor="#F3F2F1"
+                   HasShadow="False"
+                   HeightRequest="100"
+                   WidthRequest="100"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                   Padding="0">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter Property="BorderColor"
+                                            Value="#FF3300" />
+                                    <Setter TargetName="check"
+                                            Property="Opacity"
+                                            Value="1" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="#F3F2F1" />
+                                    <Setter Property="BorderColor"
+                                            Value="#F3F2F1" />
+                                    <Setter TargetName="check"
+                                            Property="Opacity"
+                                            Value="0" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                <Grid Margin="4"
+                      WidthRequest="100">
+                    <Grid WidthRequest="18"
+                          HeightRequest="18"
+                          HorizontalOptions="End"
+                          VerticalOptions="Start">
+                        <Ellipse Stroke="Blue"
+                                 Fill="White"
+                                 WidthRequest="16"
+                                 HeightRequest="16"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                        <Ellipse x:Name="check"
+                                 Fill="Blue"
+                                 WidthRequest="8"
+                                 HeightRequest="8"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                    </Grid>
+                    <ContentPresenter />
+                </Grid>
+            </Frame>
+        </ControlTemplate>
+
+        <Style TargetType="RadioButton">
+            <Setter Property="ControlTemplate"
+                    Value="{StaticResource RadioButtonTemplate}" />
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+            <Label Text="Select No. of players" TextColor="White" />
+            <StackLayout RadioButtonGroup.GroupName="players"
+                         HorizontalOptions="CenterAndExpand"
+                         Orientation="Horizontal">
+                <RadioButton Value="2" IsChecked="{Binding TwoPlayer}">
+                    <RadioButton.Content>
+                        <StackLayout>
+                            <Image Source="cat.png"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="CenterAndExpand" />
+                            <Label Text="Two"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="End" />
+                        </StackLayout>
+                    </RadioButton.Content>
+                </RadioButton>
+                <RadioButton Value="3" IsChecked="{Binding ThreePlayer}">
+                    <RadioButton.Content>
+                        <StackLayout>
+                            <Image Source="elephant.png"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="CenterAndExpand" />
+                            <Label Text="Three"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="End" />
+                        </StackLayout>
+                    </RadioButton.Content>
+                </RadioButton>
+                <RadioButton Value="4" IsChecked="{Binding FourPlayer}">
+                    <RadioButton.Content>
+                        <StackLayout>
+                            <Image Source="monkey.png"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="CenterAndExpand" />
+                            <Label Text="Four"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="End" />
+                        </StackLayout>
+                    </RadioButton.Content>
+                </RadioButton>
+            </StackLayout>
+            <StackLayout>
+                <Button Text="Create Room"
+                        BorderColor="White"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        BorderWidth="2"
+                        IsEnabled="{Binding IsNotBusy}"
+                        Command="{Binding CreateRoomCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
