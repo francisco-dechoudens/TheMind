@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MvvmHelpers;
 
 namespace TheMind.Models
@@ -21,6 +22,13 @@ namespace TheMind.Models
         {
             get => nickName;
             set => SetProperty(ref nickName, value);
+        }
+
+        private List<Card> cardsInHand;
+        public List<Card> CardsInHand
+        {
+            get => cardsInHand;
+            set => SetProperty(ref cardsInHand, value);
         }
     }
 }
