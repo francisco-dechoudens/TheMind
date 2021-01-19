@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheMind.Views.Controls.HandOfCardsView"
+             xmlns:controls="clr-namespace:TheMind.Views.Controls">
+    <ContentView.Content>
+        <Grid>
+            <controls:CardView Grid.Row="0" />
+            <controls:CardView Grid.Row="0" Margin="0,25,0,0"  />
+            <controls:CardView Grid.Row="0" Margin="0,50,0,0"  />
+            <controls:CardView Grid.Row="0" Margin="0,75,0,0"  />
+            <controls:CardView Grid.Row="0" Margin="0,100,0,0"  />
+        </Grid>
+    </ContentView.Content>
+</ContentView>
