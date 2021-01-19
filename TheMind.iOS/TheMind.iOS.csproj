@@ -139,4 +139,12 @@
       <Name>TheMind</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\heart.png" />
+    <BundleResource Include="Resources\heart%402x.png" />
+    <BundleResource Include="Resources\heart%403x.png" />
+    <BundleResource Include="Resources\thunder.png" />
+    <BundleResource Include="Resources\thunder%402x.png" />
+    <BundleResource Include="Resources\thunder%403x.png" />
+  </ItemGroup>
 </Project>

@@ -1,7 +1,93 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TheMind.Views.GamePage">
+             x:Class="TheMind.Views.GamePage"
+             BackgroundColor="Black">
     <ContentPage.Content>
+        <StackLayout>
+            <StackLayout.Padding>
+                 <OnPlatform x:TypeArguments="Thickness"  
+                    iOS="20,40,20,20"  
+                    Android="20,30,20,20">  
+                 </OnPlatform>
+            </StackLayout.Padding>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0,0,0,10">
+                <Image Source="heart"
+                   HeightRequest="50"
+                   WidthRequest="50" />
+                <Image Source="heart"
+                   HeightRequest="50"
+                   WidthRequest="50" />
+                <Image Source="heart"
+                   HeightRequest="50"
+                   WidthRequest="50" />
+                <Image Source="heart"
+                   HeightRequest="50"
+                   WidthRequest="50" />
+                <Image Source="heart"
+                   HeightRequest="50"
+                   WidthRequest="50" />
+            </StackLayout>
+
+            <Frame VerticalOptions="FillAndExpand" CornerRadius="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0"
+                           Text="100"
+                           FontSize="50"
+                           TextColor="Black"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Start"/>
+                    <Label Grid.Row="0"
+                           Text="100"
+                           FontSize="50"
+                           TextColor="Black"
+                           HorizontalTextAlignment="End"
+                           VerticalTextAlignment="Start"/>
+                    <Label Grid.Row="1"
+                           Text="100"
+                           FontSize="150"
+                           TextColor="Black"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="2"
+                           Text="100"
+                           FontSize="50"
+                           TextColor="Black"
+                           Rotation="-180"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="End"/>
+                    <Label Grid.Row="2"
+                           Text="100"
+                           FontSize="50"
+                           TextColor="Black"
+                           Rotation="-180"
+                           HorizontalTextAlignment="End"
+                           VerticalTextAlignment="End"/>
+                </Grid>
+            </Frame>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0,20,0,0">
+                <Image Source="thunder"
+                   HeightRequest="50"
+                   WidthRequest="50" />
+                <Image Source="thunder"
+                   HeightRequest="50"
+                   WidthRequest="50" />
+                <Image Source="thunder"
+                   HeightRequest="50"
+                   WidthRequest="50" />
+                <Image Source="thunder"
+                   HeightRequest="50"
+                   WidthRequest="50" />
+                <Image Source="thunder"
+                   HeightRequest="50"
+                   WidthRequest="50" />
+            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

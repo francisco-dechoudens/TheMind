@@ -6,14 +6,18 @@ namespace TheMind.Models
 {
     public class Game
     {
-        public string Level { get; set; }
         public List<Card> Deck { get; set; }
-        private int NoOfCards = 10;
+        public List<Player> Players { get; set; }
 
-        public Game(int level)
+        private int DECKSIZE = 10;
+
+        public Game(List<Player> players, int level)
         {
-            Deck = InitDeck(NoOfCards);
+            Players = players;
+
+            Deck = InitDeck(DECKSIZE);
             Deck = Shuffle(Deck);
+            DealCards(Deck, level, Players);
         }
 
         private List<Card> InitDeck(int size)
@@ -42,6 +46,15 @@ namespace TheMind.Models
             }
 
             return deck;
+        }
+
+        public void DealCards(List<Card> deck, int noOfCards, List<Player> players)
+        {
+            foreach(var player in players)
+            {
+                player.CardsInHand = deck.Take(noOfCards).ToList();
+                deck.RemoveRange(0, noOfCards);
+            }
         }
     }
 }
