@@ -2,14 +2,20 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheMind.Views.Controls.HandOfCardsView"
+             x:Name="this"
              xmlns:controls="clr-namespace:TheMind.Views.Controls">
     <ContentView.Content>
-        <Grid>
-            <controls:CardView Grid.Row="0" />
-            <controls:CardView Grid.Row="0" Margin="0,25,0,0"  />
-            <controls:CardView Grid.Row="0" Margin="0,50,0,0"  />
-            <controls:CardView Grid.Row="0" Margin="0,75,0,0"  />
-            <controls:CardView Grid.Row="0" Margin="0,100,0,0"  />
-        </Grid>
+            <Grid  BindingContext="{x:Reference this}"
+                   BindableLayout.ItemsSource="{Binding Cards, Mode=TwoWay}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <controls:CardView Grid.Row="0" CardValue="{Binding Card.Value}" Margin="{Binding Displacement}" />
+                        <!--<controls:CardView Grid.Row="0" CardValue="1" Margin="0,25,0,0"  />
+                    <controls:CardView Grid.Row="0" CardValue="1" Margin="0,50,0,0"  />
+                    <controls:CardView Grid.Row="0" CardValue="1" Margin="0,75,0,0"  />
+                    <controls:CardView Grid.Row="0" CardValue="1" Margin="0,100,0,0"  />-->
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </Grid>
     </ContentView.Content>
 </ContentView>

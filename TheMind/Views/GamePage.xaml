@@ -21,8 +21,8 @@
             <controls:HealthBarView Grid.Row="0"
                                     NoOfHearts="3"/> 
 
-            <controls:CardView Grid.Row="1"
-                               CardValue="100"/>
+            <controls:HandOfCardsView Grid.Row="1"
+                                      NoOfCards="3"/>
 
             <controls:PowerBarView Grid.Row="2"
                                    NoOfPowers="5"/>
