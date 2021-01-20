@@ -19,7 +19,7 @@
             </Grid.RowDefinitions>
 
             <controls:HealthBarView Grid.Row="0"
-                                    NoOfHearts="4"/> 
+                                    NoOfHearts="3"/> 
 
             <controls:CardView Grid.Row="1" />
 

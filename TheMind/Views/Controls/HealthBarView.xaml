@@ -4,24 +4,17 @@
              x:Class="TheMind.Views.Controls.HealthBarView"
              x:Name="this">
     <ContentView.Content>
-        <StackLayout BindingContext="{x:Reference this}">
-            <Label Text="{Binding NoOfHearts}" TextColor="white"></Label>
-            <StackLayout  
+        <StackLayout  BindingContext="{x:Reference this}" Orientation="Horizontal"
                       BindableLayout.ItemsSource="{Binding Hearts, Mode=TwoWay}"
                       HorizontalOptions="CenterAndExpand"
                       Padding="0,20,0,0">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Orientation="Horizontal" >
-                        <Image Source="thunder"
+                        <Image Source="heart"
                                HeightRequest="50"
                                WidthRequest="50" />
-                    </StackLayout>
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </StackLayout>
-        </StackLayout>
-        
-
     </ContentView.Content>
 </ContentView>

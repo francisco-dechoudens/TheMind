@@ -10,22 +10,32 @@ namespace TheMind.Views.Controls
             nameof(NoOfHearts),        // the name of the bindable property
             typeof(int),     // the bindable property type
             typeof(HealthBarView),   // the parent object type
-            0);      // the default value for the property
+            0, // the default value for the property
+            propertyChanged: NoOfHeartsPropertyPropertyChanged);      
+
+
+        static void NoOfHeartsPropertyPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            AttachEffect(bindable as HealthBarView, (int)newValue);
+        }
+
+        static void AttachEffect(HealthBarView element, int numberOfHearts)
+        {
+            var effect = element.NoOfHearts;
+
+            var hearts = new List<int>();
+            for (int i = 0; i < element.NoOfHearts; i++)
+            {
+                hearts.Add(i);
+            }
+
+            element.Hearts = hearts;
+        }
 
         public int NoOfHearts
         {
             get => (int)GetValue(HealthBarView.NoOfHeartsProperty);
-            set {
-                SetValue(HealthBarView.NoOfHeartsProperty, value);
-
-                var hearts = new List<int>();
-                for (int i = 0; i < value; i++)
-                {
-                    hearts.Add(i);
-                }
-
-                Hearts = hearts;
-            }
+            set =>SetValue(HealthBarView.NoOfHeartsProperty, value);
         }
 
         public static readonly BindableProperty HeartsProperty = BindableProperty.Create(
