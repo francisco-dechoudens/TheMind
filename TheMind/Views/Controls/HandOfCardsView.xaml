@@ -9,11 +9,14 @@
                    BindableLayout.ItemsSource="{Binding Cards, Mode=TwoWay}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <controls:CardView Grid.Row="0" CardValue="{Binding Card.Value}" Margin="{Binding Displacement}" />
-                        <!--<controls:CardView Grid.Row="0" CardValue="1" Margin="0,25,0,0"  />
-                    <controls:CardView Grid.Row="0" CardValue="1" Margin="0,50,0,0"  />
-                    <controls:CardView Grid.Row="0" CardValue="1" Margin="0,75,0,0"  />
-                    <controls:CardView Grid.Row="0" CardValue="1" Margin="0,100,0,0"  />-->
+                        <controls:CardView Grid.Row="0" CardValue="{Binding Card.Value}" Margin="{Binding Displacement}" >
+                            <controls:CardView.GestureRecognizers>
+                                <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>
+                                <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped"/>
+                                <SwipeGestureRecognizer Direction="Up" Swiped="OnSwiped"/>
+                                <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>
+                            </controls:CardView.GestureRecognizers>
+                        </controls:CardView>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </Grid>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TheMind.Models;
 using Xamarin.Forms;
 
@@ -7,28 +8,28 @@ namespace TheMind.Views.Controls
 {
     public partial class HandOfCardsView : ContentView
     {
-        public static readonly BindableProperty NoOfCardsProperty = BindableProperty.Create(
-           nameof(NoOfCards),
-           typeof(int),
+        public static readonly BindableProperty CardsInHandProperty = BindableProperty.Create(
+           nameof(CardsInHand),
+           typeof(List<Card>),
            typeof(HandOfCardsView),
-           0,
-           propertyChanged: NoOfCardsPropertyPropertyChanged);
+           null,
+           propertyChanged: CardsInHandPropertyPropertyChanged);
 
 
-        static void NoOfCardsPropertyPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        static void CardsInHandPropertyPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            AttachEffect(bindable as HandOfCardsView, (int)newValue);
+            AttachEffect(bindable as HandOfCardsView, (List<Card>)newValue);
         }
 
-        static void AttachEffect(HandOfCardsView element, int numberOfCards)
+        static void AttachEffect(HandOfCardsView element, List<Card> cardsInHand)
         {
-            var effect = element.NoOfCards;
+            var effect = element.CardsInHand;
 
             var cards = new List<HandOfCard>();
-            for (int i = 0; i < element.NoOfCards; i++)
+            for (int i = 0; i < element.CardsInHand.Count; i++)
             {
                 cards.Add(new HandOfCard() {
-                    Card = new Card() { Value = i },
+                    Card = element.CardsInHand[i],
                     Displacement = new Thickness(0,i*25,0,0)
                 });
             }
@@ -36,10 +37,10 @@ namespace TheMind.Views.Controls
             element.Cards = cards;
         }
 
-        public int NoOfCards
+        public List<Card> CardsInHand
         {
-            get => (int)GetValue(HandOfCardsView.NoOfCardsProperty);
-            set => SetValue(HandOfCardsView.NoOfCardsProperty, value);
+            get => (List<Card>)GetValue(HandOfCardsView.CardsInHandProperty);
+            set => SetValue(HandOfCardsView.CardsInHandProperty, value);
         }
 
         public static readonly BindableProperty CardsProperty = BindableProperty.Create(
@@ -57,6 +58,26 @@ namespace TheMind.Views.Controls
         public HandOfCardsView()
         {
             InitializeComponent();
+        }
+
+        async void OnSwiped(object sender, SwipedEventArgs e)
+        {
+            switch (e.Direction)
+            {
+                case SwipeDirection.Left:
+                    await ((CardView)sender).TranslateTo(-1000, 0, 500);
+                    break;
+                case SwipeDirection.Right:
+                    await ((CardView)sender).TranslateTo(1000, 0, 500);
+                    break;
+                case SwipeDirection.Up:
+                    await ((CardView)sender).TranslateTo(0, -1000, 500);
+                    break;
+                case SwipeDirection.Down:
+                    await ((CardView)sender).TranslateTo(0, 1000, 500);
+                    break;
+            }
+
         }
     }
 }

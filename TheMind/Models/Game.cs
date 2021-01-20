@@ -9,7 +9,7 @@ namespace TheMind.Models
         public List<Card> Deck { get; set; }
         public List<Player> Players { get; set; }
 
-        private int DECKSIZE = 10;
+        private int DECKSIZE = 100;
 
         public Game(List<Player> players, int level)
         {
@@ -52,7 +52,7 @@ namespace TheMind.Models
         {
             foreach(var player in players)
             {
-                player.CardsInHand = deck.Take(noOfCards).ToList();
+                player.CardsInHand = deck.Take(noOfCards).OrderByDescending(c => c.Value).ToList();
                 deck.RemoveRange(0, noOfCards);
             }
         }

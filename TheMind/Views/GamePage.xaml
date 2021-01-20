@@ -22,7 +22,7 @@
                                     NoOfHearts="3"/> 
 
             <controls:HandOfCardsView Grid.Row="1"
-                                      NoOfCards="3"/>
+                                      CardsInHand="{Binding Cards}"/>
 
             <controls:PowerBarView Grid.Row="2"
                                    NoOfPowers="5"/>
