@@ -6,8 +6,7 @@
     <ContentView.Content>
         <StackLayout  BindingContext="{x:Reference this}" Orientation="Horizontal"
                       BindableLayout.ItemsSource="{Binding Hearts, Mode=TwoWay}"
-                      HorizontalOptions="CenterAndExpand"
-                      Padding="0,20,0,0">
+                      HorizontalOptions="CenterAndExpand">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                         <Image Source="heart"

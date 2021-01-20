@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TheMind.Views.Controls.CardView">
+             x:Class="TheMind.Views.Controls.CardView"
+             x:Name="this">
     <ContentView.Content>
-        <Frame VerticalOptions="FillAndExpand" CornerRadius="20" OutlineColor="White">
+        <Frame BindingContext="{x:Reference this}" VerticalOptions="FillAndExpand" CornerRadius="20" OutlineColor="White">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -11,33 +12,33 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0"
-                           Text="100"
+                           Text="{Binding CardValue}"
                            FontSize="50"
                            TextColor="Black"
                            HorizontalTextAlignment="Start"
                            VerticalTextAlignment="Start"/>
                     <Label Grid.Row="0"
-                           Text="100"
+                           Text="{Binding CardValue}"
                            FontSize="50"
                            TextColor="Black"
                            HorizontalTextAlignment="End"
                            VerticalTextAlignment="Start"/>
                     <Label Grid.Row="1"
-                           Text="100"
+                           Text="{Binding CardValue}"
                            FontSize="150"
                            TextColor="Black"
                            VerticalOptions="CenterAndExpand"
                            HorizontalTextAlignment="Center"
                            VerticalTextAlignment="Center"/>
                     <Label Grid.Row="2"
-                           Text="100"
+                           Text="{Binding CardValue}"
                            FontSize="50"
                            TextColor="Black"
                            Rotation="-180"
                            HorizontalTextAlignment="Start"
                            VerticalTextAlignment="End"/>
                     <Label Grid.Row="2"
-                           Text="100"
+                           Text="{Binding CardValue}"
                            FontSize="50"
                            TextColor="Black"
                            Rotation="-180"
