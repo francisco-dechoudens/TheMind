@@ -1,24 +1,20 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TheMind.Views.Controls.PowerBarView">
+             x:Class="TheMind.Views.Controls.PowerBarView"
+             x:Name="this">
     <ContentView.Content>
-        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0,20,0,0">
-            <Image Source="thunder"
-                   HeightRequest="50"
-                   WidthRequest="50" />
-            <Image Source="thunder"
-                   HeightRequest="50"
-                   WidthRequest="50" />
-            <Image Source="thunder"
-                   HeightRequest="50"
-                   WidthRequest="50" />
-            <Image Source="thunder"
-                   HeightRequest="50"
-                   WidthRequest="50" />
-            <Image Source="thunder"
-                   HeightRequest="50"
-                   WidthRequest="50" />
+        <StackLayout  BindingContext="{x:Reference this}" Orientation="Horizontal"
+                      BindableLayout.ItemsSource="{Binding Powers, Mode=TwoWay}"
+                      HorizontalOptions="CenterAndExpand"
+                      Padding="0,20,0,0">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="thunder"
+                               HeightRequest="50"
+                               WidthRequest="50" />
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

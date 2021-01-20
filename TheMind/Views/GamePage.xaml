@@ -23,7 +23,8 @@
 
             <controls:CardView Grid.Row="1" />
 
-            <controls:PowerBarView Grid.Row="2" />
+            <controls:PowerBarView Grid.Row="2"
+                                   NoOfPowers="5"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
