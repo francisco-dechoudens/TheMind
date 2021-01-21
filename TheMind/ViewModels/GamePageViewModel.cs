@@ -12,9 +12,13 @@ namespace TheMind.ViewModels
     public class GamePageViewModel : BaseViewModel
     {
         private PlayerService services;
+        private GameService gameServices;
+
         private int DECKSIZE = 100;
 
         public List<Card> Deck { get; set; }
+
+        public Game Game { get; set; }
 
         private List<Player> players;
         public List<Player> Players
@@ -32,6 +36,7 @@ namespace TheMind.ViewModels
 
         public GamePageViewModel()
         {
+            gameServices = new GameService();
             services = new PlayerService();
             StartGameCommand = new Command(async () => await StartGameClicked());
             DealMoreCardsCommand = new Command(async () => await DealMoreCardsClicked());
@@ -47,6 +52,7 @@ namespace TheMind.ViewModels
 
             Deck = InitDeck(DECKSIZE);
             Deck = Shuffle(Deck);
+
             await DealCards(Deck, 5, Players);
         }
 
@@ -92,13 +98,23 @@ namespace TheMind.ViewModels
 
         public async Task DealCards(List<Card> deck, int noOfCards, List<Player> players)
         {
+            Game = new Game();
+            Game.TableName = "Abarca-Table";
+            Game.DealtDeck = new List<Card>();
+
             foreach (var player in players)
             {
-                player.CardsInHand = deck.Take(noOfCards).OrderByDescending(c => c.Value).ToList();
+                var dealthCards = deck.Take(noOfCards);
+                Game.DealtDeck.AddRange(dealthCards);
+
+                player.CardsInHand = dealthCards.OrderByDescending(c => c.Value).ToList();
+
                 deck.RemoveRange(0, noOfCards);
 
                 await services.SavePlayerState(player);
             }
+
+            await gameServices.SaveGameState(Game);
         }
 
     }

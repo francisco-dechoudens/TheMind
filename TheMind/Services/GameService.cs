@@ -21,11 +21,11 @@ namespace TheMind.Services
         }
 
 
-        public async Task SaveGameState(Game player)
+        public async Task SaveGameState(Game game)
         {
             await DBClient.client
                 .Child("Games")
-                .PostAsync(player);
+                .PostAsync(game);
         }
     }
 }
