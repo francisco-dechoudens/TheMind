@@ -1,12 +1,10 @@
 ﻿using System;
+using MvvmHelpers;
+
 namespace TheMind.Models
 {
-    public class Card
+    public class Card 
     {
-        public Card()
-        {
-        }
-
         public int Value { get; set; }
     }
 }

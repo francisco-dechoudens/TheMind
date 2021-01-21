@@ -28,9 +28,10 @@ namespace TheMind.Views.Controls
             var cards = new List<HandOfCard>();
             for (int i = 0; i < element.CardsInHand.Count; i++)
             {
-                cards.Add(new HandOfCard() {
+                cards.Add(new HandOfCard()
+                {
                     Card = element.CardsInHand[i],
-                    Displacement = new Thickness(0,i*25,0,0)
+                    Displacement = new Thickness(0, i * 25, 0, 0)
                 });
             }
 

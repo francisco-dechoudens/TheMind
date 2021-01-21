@@ -10,7 +10,7 @@ namespace TheMind.Views
         public PlayerGamePage()
         {
             InitializeComponent();
-            BindingContext = new PlayerGamePageViewModel();
+            //BindingContext = new PlayerGamePageViewModel();
         }
     }
 }

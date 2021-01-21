@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:TheMind.Views.Controls">
     <ContentView.Content>
             <Grid  BindingContext="{x:Reference this}"
-                   BindableLayout.ItemsSource="{Binding Cards, Mode=TwoWay}">
+                   BindableLayout.ItemsSource="{Binding Cards}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <controls:CardView Grid.Row="0" CardValue="{Binding Card.Value}" Margin="{Binding Displacement}" >

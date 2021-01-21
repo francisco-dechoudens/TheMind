@@ -4,6 +4,7 @@
              x:Class="TheMind.Views.PlayerGamePage"
              x:Name="this"
              xmlns:controls="clr-namespace:TheMind.Views.Controls"
+             xmlns:viewModel="clr-namespace:TheMind.ViewModels"
              BackgroundColor="Black">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"  
@@ -11,20 +12,23 @@
                     Android="20,30,20,20">
         </OnPlatform>
     </ContentPage.Padding>
+    <ContentPage.BindingContext>
+        <viewModel:PlayerGamePageViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        <Grid>
+        <Grid> 
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <controls:HealthBarView Grid.Row="0"
-                                    NoOfHearts="3"/>  
+            <controls:HealthBarView Grid.Row="0"  
+                                    NoOfHearts="3"/>   
 
             <controls:HandOfCardsView Grid.Row="1"
-                                      CardsInHand="{Binding Cards}"/>
-
+                                      CardsInHand="{Binding Cards}"/>   
+             
             <!--<controls:PowerBarView Grid.Row="2"
                                    NoOfPowers="5"/>-->
 

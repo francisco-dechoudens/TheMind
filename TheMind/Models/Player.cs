@@ -10,6 +10,8 @@ namespace TheMind.Models
         {
         }
 
+        public Guid Id { get; set; }
+
         private bool isSeated;
         public bool IsSeated
         {

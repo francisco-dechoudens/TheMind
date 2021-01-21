@@ -19,11 +19,13 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <controls:HealthBarView Grid.Row="0"
-                                    NoOfHearts="3"/>  
+            <!--<controls:HealthBarView Grid.Row="0"
+                                    NoOfHearts="3"/>-->
+
+            <Button Grid.Row="0" Text="Deal more cards" Command="{Binding DealMoreCardsCommand}" />
 
             <controls:HandOfCardsView Grid.Row="1"
-                                      CardsInHand="{Binding Cards}"/>
+                                      CardsInHand="{Binding Cards}"/>  
 
             <!--<controls:PowerBarView Grid.Row="2"
                                    NoOfPowers="5"/>-->
