@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TheMind.Views.GamePage"
+             x:Class="TheMind.Views.PlayerGamePage"
              x:Name="this"
              xmlns:controls="clr-namespace:TheMind.Views.Controls"
              BackgroundColor="Black">
@@ -28,7 +28,8 @@
             <!--<controls:PowerBarView Grid.Row="2"
                                    NoOfPowers="5"/>-->
 
-            <Button Grid.Row="2" Text="Start Game" Command="{Binding StartGameCommand}" />
+
+            <Button Grid.Row="2" Text="Get Cards" Command="{Binding GetCardsCommand}" />
 
             </Grid>
 
