@@ -101,6 +101,7 @@ namespace TheMind.ViewModels
             Game = new Game();
             Game.TableName = "Abarca-Table";
             Game.DealtDeck = new List<Card>();
+            Game.Players = players;
 
             foreach (var player in players)
             {
@@ -115,6 +116,14 @@ namespace TheMind.ViewModels
             }
 
             await gameServices.SaveGameState(Game);
+
+            var gameDBBind = gameServices.GetGameData(Game.TableName);
+
+            gameDBBind.Subscribe(item =>
+            {
+                Game = ((Game)item.Object);
+                Cards = Game.PlayedCards;
+            });
         }
 
     }

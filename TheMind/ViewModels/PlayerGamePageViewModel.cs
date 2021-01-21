@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
@@ -16,6 +17,9 @@ namespace TheMind.ViewModels
     public class PlayerGamePageViewModel : BaseViewModel
     {
         private PlayerService services;
+        private GameService gameServices;
+
+        public Game Game { get; set; }
 
         private List<Card> cards;
         public List<Card> Cards
@@ -35,15 +39,28 @@ namespace TheMind.ViewModels
         public PlayerGamePageViewModel()
         {
             services = new PlayerService();
+            gameServices = new GameService();
             GetCardsCommand = new Command(async () => await GetCardsClicked());
-           
 
-            var playerDBBind = services.GetPlayerData("Francisco");
 
-            playerDBBind.Subscribe(item =>
+            //var playerDBBind = services.GetPlayerData("Francisco");
+
+            //playerDBBind.Subscribe(item =>
+            //{
+            //    Player = ((Player)item.Object);
+            //    Cards = Player.CardsInHand;
+            //});
+
+            var gameDBBind = gameServices.GetGameData("Abarca-Table");
+
+            gameDBBind.Subscribe(item =>
             {
-                Player = ((Player)item.Object);
-                Cards = Player.CardsInHand;
+                Game = ((Game)item.Object);
+                var players = Game.Players;
+                var selectedPlayer = players.Single(p => p.NickName == "Francisco");
+
+                Player = selectedPlayer;
+                Cards = selectedPlayer.CardsInHand;
             });
         }
 
@@ -51,8 +68,23 @@ namespace TheMind.ViewModels
 
         public async Task GetCardsClicked()
         {
-            Player.CardsInHand.RemoveAt(Player.CardsInHand.Count-1);
-            await services.UpdatePlayerState(Player);
+            var cardremoved = Player.CardsInHand.LastOrDefault();
+            Player.CardsInHand.Remove(cardremoved);
+
+            var selectedPlayer = Game.Players.First(i => i.NickName == "Francisco");
+            var index = Game.Players.IndexOf(selectedPlayer);
+
+            if (index != -1)
+                Game.Players[index] = Player;
+
+            if(Game.PlayedCards == null)
+            {
+                Game.PlayedCards = new List<Card>();
+            }
+
+            Game.PlayedCards.Add(cardremoved);
+
+            await gameServices.UpdateGameState(Game);
         }
     }
 }
