@@ -40,7 +40,7 @@ namespace TheMind.ViewModels
         {
             services = new PlayerService();
             gameServices = new GameService();
-            GetCardsCommand = new Command(async () => await GetCardsClicked());
+            SendCardsCommand = new Command(async () => await SendCardToBoard());
 
 
             //var playerDBBind = services.GetPlayerData("Francisco");
@@ -64,9 +64,9 @@ namespace TheMind.ViewModels
             });
         }
 
-        public Command GetCardsCommand { get; }
+        public Command SendCardsCommand { get; set; }
 
-        public async Task GetCardsClicked()
+        public async Task SendCardToBoard()
         {
             var cardremoved = Player.CardsInHand.LastOrDefault();
             Player.CardsInHand.Remove(cardremoved);

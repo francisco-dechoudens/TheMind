@@ -13,7 +13,7 @@
         </OnPlatform>
     </ContentPage.Padding>
     <ContentPage.BindingContext>
-        <viewModel:PlayerGamePageViewModel />
+        <viewModel:PlayerGamePageViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid> 
@@ -23,21 +23,16 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <controls:HealthBarView Grid.Row="0"  
-                                    NoOfHearts="3"/>   
+            <controls:HandOfCardsView Grid.Row="1" 
+                                      CardsInHand="{Binding Cards}" 
+                                      ActionCommand="{Binding SendCardsCommand}"/>
 
-            <controls:HandOfCardsView Grid.Row="1"
-                                      CardsInHand="{Binding Cards}"/>   
+             <controls:HealthBarView Grid.Row="0" 
+                                    NoOfHearts="3"/>
              
-            <!--<controls:PowerBarView Grid.Row="2"
-                                   NoOfPowers="5"/>-->
-
-
-            <Button Grid.Row="2" Text="Get Cards" Command="{Binding GetCardsCommand}" />
+            <controls:PowerBarView Grid.Row="2"
+                                   NoOfPowers="5"/>
 
             </Grid>
-
-
-
     </ContentPage.Content>
 </ContentPage>

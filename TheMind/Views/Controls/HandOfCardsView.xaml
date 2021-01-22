@@ -11,11 +11,11 @@
                     <DataTemplate>
                         <controls:CardView Grid.Row="0" CardValue="{Binding Card.Value}" Margin="{Binding Displacement}" >
                             <controls:CardView.GestureRecognizers>
-                                <!--<SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>-->
-                                <!--<SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped"/>-->
-                                <SwipeGestureRecognizer Direction="Up" Swiped="OnSwiped"/>
+                                <!--<SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>--> 
+                                <!--<SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped"/>-->  
+                                <SwipeGestureRecognizer Direction="Up" Swiped="OnSwiped" />
                                 <!--<SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>-->
-                            </controls:CardView.GestureRecognizers>
+                            </controls:CardView.GestureRecognizers> 
                         </controls:CardView>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>

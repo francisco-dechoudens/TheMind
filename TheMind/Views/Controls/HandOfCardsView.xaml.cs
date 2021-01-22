@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TheMind.Models;
 using Xamarin.Forms;
 
@@ -60,6 +61,42 @@ namespace TheMind.Views.Controls
             set => SetValue(HandOfCardsView.CardsProperty, value);
         }
 
+        #region ActionCommand
+
+        public static readonly BindableProperty ActionCommandProperty =
+            BindableProperty.Create(nameof(ActionCommand), typeof(ICommand), typeof(HandOfCardsView), null);
+
+        public ICommand ActionCommand
+        {
+            get => (ICommand)GetValue(ActionCommandProperty);
+            set => SetValue(ActionCommandProperty, value);
+        }
+
+        #endregion ActionCommand
+
+        #region ActionCommandParameter
+
+        public static readonly BindableProperty ActionCommandParameterProperty =
+            BindableProperty.Create(nameof(ActionCommandParameter), typeof(object), typeof(HandOfCardsView), null);
+
+        public object ActionCommandParameter
+        {
+            get => GetValue(ActionCommandParameterProperty);
+            set => SetValue(ActionCommandParameterProperty, value);
+        }
+
+        #endregion ActionCommandParameter
+
+        // Helper method for invoking commands safely
+        public static void Execute(ICommand command)
+        {
+            if (command == null) return;
+            if (command.CanExecute(null))
+            {
+                command.Execute(null);
+            }
+        }
+
         public HandOfCardsView()
         {
             InitializeComponent();
@@ -83,6 +120,7 @@ namespace TheMind.Views.Controls
                     break;
             }
 
+            Execute(ActionCommand);
         }
     }
 }
