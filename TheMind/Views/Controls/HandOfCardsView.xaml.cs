@@ -26,13 +26,17 @@ namespace TheMind.Views.Controls
             var effect = element.CardsInHand;
 
             var cards = new List<HandOfCard>();
-            for (int i = 0; i < element.CardsInHand.Count; i++)
+
+            if (element.CardsInHand != null)
             {
-                cards.Add(new HandOfCard()
+                for (int i = 0; i < element.CardsInHand.Count; i++)
                 {
-                    Card = element.CardsInHand[i],
-                    Displacement = new Thickness(0, i * 25, 0, 0)
-                });
+                    cards.Add(new HandOfCard()
+                    {
+                        Card = element.CardsInHand[i],
+                        Displacement = new Thickness(0, i * 25, 0, 0)
+                    });
+                }
             }
 
             element.Cards = cards;

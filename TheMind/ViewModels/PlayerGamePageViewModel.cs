@@ -57,7 +57,7 @@ namespace TheMind.ViewModels
             {
                 Game = ((Game)item.Object);
                 var players = Game.Players;
-                var selectedPlayer = players.Single(p => p.NickName == "Francisco");
+                var selectedPlayer = players.Single(p => p.NickName == "Lala");
 
                 Player = selectedPlayer;
                 Cards = selectedPlayer.CardsInHand;
@@ -71,7 +71,7 @@ namespace TheMind.ViewModels
             var cardremoved = Player.CardsInHand.LastOrDefault();
             Player.CardsInHand.Remove(cardremoved);
 
-            var selectedPlayer = Game.Players.First(i => i.NickName == "Francisco");
+            var selectedPlayer = Game.Players.First(i => i.NickName == "Lala");
             var index = Game.Players.IndexOf(selectedPlayer);
 
             if (index != -1)

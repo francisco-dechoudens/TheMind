@@ -109,10 +109,7 @@ namespace TheMind.ViewModels
                 Game.DealtDeck.AddRange(dealthCards);
 
                 player.CardsInHand = dealthCards.OrderByDescending(c => c.Value).ToList();
-
                 deck.RemoveRange(0, noOfCards);
-
-                await services.SavePlayerState(player);
             }
 
             await gameServices.SaveGameState(Game);
