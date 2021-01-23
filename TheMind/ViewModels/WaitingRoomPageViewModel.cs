@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using TheMind.Models;
+using TheMind.Services;
 using Xamarin.Forms;
 
 namespace TheMind.ViewModels
 {
     public class WaitingRoomPageViewModel : BaseViewModel
     {
-        private List<Player> players;
-        public List<Player> Players
+        GameService services;
+
+        private ObservableCollection<Player> players;
+        public ObservableCollection<Player> Players
         {
             get => players;
             set => SetProperty(ref players, value);
@@ -34,12 +38,11 @@ namespace TheMind.ViewModels
         }
 
 
-        public WaitingRoomPageViewModel()
+        public WaitingRoomPageViewModel(INavigation navigation, string key)
         {
-            Players = new List<Player>();
-            players.Add(new Player() { NickName = "Seat #1" });
-            players.Add(new Player() { NickName = "Seat #2" });
+            services = new GameService();
 
+            Players = services.GetGamePlayers(key);
             SeatSelectedCommand = new MvvmHelpers.Commands.Command(this.SeatSelected);
         }
 

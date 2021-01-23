@@ -13,7 +13,7 @@ namespace TheMind
             InitializeComponent();
             DBClient.Init();
 
-            MainPage = new PlayerGamePage();
+            MainPage = new NavigationPage(new HomePage());
         }
 
         protected override void OnStart()

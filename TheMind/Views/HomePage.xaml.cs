@@ -5,11 +5,12 @@ using Xamarin.Forms;
 
 namespace TheMind.Views
 {
-    public partial class WaitingRoomPage : ContentPage
+    public partial class HomePage : ContentPage
     {
-        public WaitingRoomPage()
+        public HomePage()
         {
             InitializeComponent();
+            BindingContext = new HomePageViewModel(this.Navigation);
         }
     }
 }

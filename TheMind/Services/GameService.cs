@@ -21,6 +21,29 @@ namespace TheMind.Services
             return data;
         }
 
+        public async Task<string> GetGameKey(string tableName)
+        {
+            var fireBaseObj = (await DBClient.client
+                  .Child("Games")
+                  .OnceAsync<Game>())
+                  .Where(a => a.Object.TableName == tableName)
+                  .FirstOrDefault();
+
+            return fireBaseObj.Key;
+        }
+
+        public ObservableCollection<Player> GetGamePlayers(string key)
+        {
+            var data = DBClient.client
+                .Child("Games")
+                .Child(key)
+                .Child("Players")
+                .AsObservable<Player>()
+                .AsObservableCollection();
+
+            return data;
+        }
+
         public IObservable<Firebase.Database.Streaming.FirebaseEvent<Game>> GetGameData(string tableName)
         {
             var data = DBClient.client
@@ -32,13 +55,15 @@ namespace TheMind.Services
         }
 
 
-        public async Task SaveGameState(Game game)
+        public async Task<string> SaveGameState(Game game)
         {
             game.Id = Guid.NewGuid();
 
-            await DBClient.client
+            var firebaseObj = await DBClient.client
                 .Child("Games")
                 .PostAsync(game);
+
+            return firebaseObj.Key;
         }
 
         public async Task UpdateGameState(Game game)

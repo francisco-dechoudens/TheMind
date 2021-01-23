@@ -70,7 +70,9 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-            <Label Text="Select No. of players" TextColor="White" />
+            <Label Text="Enter a Room Name" TextColor="White" />
+            <Entry Text="{Binding RoomName}" Placeholder="Fun Room 321"/>
+            <Label Text="Select No. of players" TextColor="White" Padding="0,20,0,0" />
             <StackLayout RadioButtonGroup.GroupName="players"
                          HorizontalOptions="CenterAndExpand"
                          Orientation="Horizontal">

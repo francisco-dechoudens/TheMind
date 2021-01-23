@@ -10,7 +10,6 @@ namespace TheMind.Views
         public CreateRoomPage()
         {
             InitializeComponent();
-            BindingContext = new CreateRoomPageViewModel();
         }
     }
 }
