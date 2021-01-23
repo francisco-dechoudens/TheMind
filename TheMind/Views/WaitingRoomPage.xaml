@@ -5,7 +5,7 @@
              xmlns:behaviors="clr-namespace:TheMind.Behaviors"
              xmlns:converters="clr-namespace:TheMind.Converters"
              BackgroundColor="Black"
-             Title="{Binding Title}">
+             Title="Lobby">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
