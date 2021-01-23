@@ -41,8 +41,8 @@ namespace TheMind.ViewModels
         public WaitingRoomPageViewModel(INavigation navigation, string key)
         {
             services = new GameService();
-
             Players = services.GetGamePlayers(key);
+
             SeatSelectedCommand = new MvvmHelpers.Commands.Command(this.SeatSelected);
         }
 
@@ -53,7 +53,7 @@ namespace TheMind.ViewModels
             if (SelectedSeat != null && !SelectedSeat.IsSeated)
             {
 
-                string name = await Application.Current.MainPage.DisplayPromptAsync("ALMOST SEATED", "ENTER A NAME");
+                string name = await Application.Current.MainPage.DisplayPromptAsync("ALMOST SEATED!!!", "Enter any nickname");
                 if (!string.IsNullOrEmpty(name))
                 {
                     SelectedSeat.IsSeated = true;

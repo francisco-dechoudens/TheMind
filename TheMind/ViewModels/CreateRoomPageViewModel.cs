@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
@@ -68,7 +69,7 @@ namespace TheMind.ViewModels
                 var noPlayer = TwoPlayer ? 2 : ThreePlayer ? 3 : FourPlayer ? 4 : 0;
 
                 var game = new Game();
-                game.TableName = RoomName;
+                game.TableName = RoomName = $"#{RandomString(6)}";
 
                 var dummyPlayer = new List<Player>();
                 for(int i=0; i < noPlayer; i++)
@@ -76,7 +77,7 @@ namespace TheMind.ViewModels
                     dummyPlayer.Add(new Player()
                     {
                         Id = Guid.NewGuid(),
-                        NickName = $"Seat #{i + 1}"
+                        NickName = $"Vacant Seat #{i + 1}"
                     });
                 }
                 game.Players = dummyPlayer;
@@ -84,12 +85,24 @@ namespace TheMind.ViewModels
 
                 IsBusy = false;
 
-                var detailPage = new WaitingRoomPage();
-                detailPage.Title = RoomName;
-                detailPage.BindingContext = new WaitingRoomPageViewModel(this.Navigation, gamekey);
+                var detailPage = new WaitingRoomPage()
+                {
+                    BindingContext = new WaitingRoomPageViewModel(this.Navigation, gamekey)
+                    {
+                        Title = RoomName
+                    }
+                };
 
                 await this.Navigation.PushAsync(detailPage);
             }
+        }
+
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

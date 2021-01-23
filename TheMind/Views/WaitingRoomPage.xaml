@@ -4,7 +4,8 @@
              x:Class="TheMind.Views.WaitingRoomPage"
              xmlns:behaviors="clr-namespace:TheMind.Behaviors"
              xmlns:converters="clr-namespace:TheMind.Converters"
-             BackgroundColor="Black">
+             BackgroundColor="Black"
+             Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
@@ -12,6 +13,10 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
+            <StackLayout Padding="20,20" Orientation="Horizontal">
+                <Label Text="Share room with friends:" TextColor="White"/>
+                <Label Text="{Binding Title}" FontAttributes="Bold" TextColor="Wheat"/>
+            </StackLayout>
             <ListView 
                       ItemsSource="{Binding Players}" 
                       HasUnevenRows="True"
