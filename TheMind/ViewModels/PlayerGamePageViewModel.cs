@@ -11,11 +11,14 @@ using MvvmHelpers.Commands;
 using TheMind.Models;
 using TheMind.Models.Enums;
 using TheMind.Services;
+using Xamarin.Forms;
+using Command = MvvmHelpers.Commands.Command;
 
 namespace TheMind.ViewModels
 {
     public class PlayerGamePageViewModel : BaseViewModel
     {
+        private INavigation Navigation;
         private PlayerService services;
         private GameService gameServices;
 
@@ -36,8 +39,9 @@ namespace TheMind.ViewModels
         }
 
 
-        public PlayerGamePageViewModel()
+        public PlayerGamePageViewModel(INavigation navigation)
         {
+            Navigation = navigation;
             services = new PlayerService();
             gameServices = new GameService();
             SendCardsCommand = new Command(async () => await SendCardToBoard());

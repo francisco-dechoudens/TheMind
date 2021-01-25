@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using TheMind.Models;
+using TheMind.Models.Enums;
 using TheMind.Services;
 using TheMind.Views;
 using Xamarin.Forms;
@@ -90,7 +91,8 @@ namespace TheMind.ViewModels
                 {
                     BindingContext = new WaitingRoomPageViewModel(this.Navigation, RoomName)//gamekey)
                     {
-                        Title = RoomName
+                        Title = RoomName,
+                        ViewMode = ViewModeEnum.Board
                     }
                 };
 

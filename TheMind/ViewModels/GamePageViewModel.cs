@@ -6,6 +6,8 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using TheMind.Models;
 using TheMind.Services;
+using Xamarin.Forms;
+using Command = MvvmHelpers.Commands.Command;
 
 namespace TheMind.ViewModels
 {
@@ -34,26 +36,33 @@ namespace TheMind.ViewModels
             set => SetProperty(ref cards, value);
         }
 
-        public GamePageViewModel()
+        public GamePageViewModel(INavigation navigation, string tableName)
         {
             gameServices = new GameService();
             services = new PlayerService();
             StartGameCommand = new Command(async () => await StartGameClicked());
             DealMoreCardsCommand = new Command(async () => await DealMoreCardsClicked());
+
+            var gameDBBind = gameServices.GetGameData(tableName);
+            gameDBBind.Subscribe(item =>
+            {
+                Game = ((Game)item.Object);
+                Cards = Game.PlayedCards;
+            });
         }
         
         public Command StartGameCommand { get; }
 
         public async Task StartGameClicked()
         {
-            Players = new List<Player>();
-            players.Add(new Player() { NickName = "Francisco", IsSeated = "true" });
-            players.Add(new Player() { NickName = "Lala", IsSeated = "true" });
+            //Players = new List<Player>();
+            //players.Add(new Player() { NickName = "Francisco", IsSeated = "true" });
+            //players.Add(new Player() { NickName = "Lala", IsSeated = "true" });
 
             Deck = InitDeck(DECKSIZE);
             Deck = Shuffle(Deck);
 
-            await DealCards(Deck, 5, Players);
+            await DealCards(Deck, 5);
         }
 
         public Command DealMoreCardsCommand { get; }
@@ -96,32 +105,20 @@ namespace TheMind.ViewModels
             return deck;
         }
 
-        public async Task DealCards(List<Card> deck, int noOfCards, List<Player> players)
+        public async Task DealCards(List<Card> deck, int noOfCards)
         {
-            Game = new Game();
-            Game.TableName = "Abarca-Table";
-            Game.DealtDeck = new List<Card>();
-            Game.Players = players;
-
-            foreach (var player in players)
+            foreach (var player in Game.Players)
             {
                 var dealthCards = deck.Take(noOfCards);
-                Game.DealtDeck.AddRange(dealthCards);
 
+                if (Game.DealtDeck == null) Game.DealtDeck = new List<Card>();
+
+                Game.DealtDeck.AddRange(dealthCards);
                 player.CardsInHand = dealthCards.OrderByDescending(c => c.Value).ToList();
                 deck.RemoveRange(0, noOfCards);
             }
 
-            await gameServices.SaveGameState(Game);
-
-            var gameDBBind = gameServices.GetGameData(Game.TableName);
-
-            gameDBBind.Subscribe(item =>
-            {
-                Game = ((Game)item.Object);
-                Cards = Game.PlayedCards;
-            });
+            await gameServices.UpdateGameState(Game);
         }
-
     }
 }

@@ -12,9 +12,6 @@
                     Android="20,30,20,20">
         </OnPlatform>
     </ContentPage.Padding>
-    <ContentPage.BindingContext>
-        <viewModel:PlayerGamePageViewModel/>
-    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid> 
             <Grid.RowDefinitions>

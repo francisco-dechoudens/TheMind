@@ -8,13 +8,18 @@ using MvvmHelpers.Commands;
 using TheMind.Models;
 using TheMind.Models.Enums;
 using TheMind.Services;
+using TheMind.Views;
 using Xamarin.Forms;
 
 namespace TheMind.ViewModels
 {
     public class WaitingRoomPageViewModel : BaseViewModel
     {
+        private INavigation Navigation;
         GameService services;
+
+        public ViewModeEnum ViewMode { get; set; }
+        public string RoomId { get; set; }
 
         private List<Player> players;
         public List<Player> Players
@@ -40,14 +45,11 @@ namespace TheMind.ViewModels
 
         public WaitingRoomPageViewModel(INavigation navigation, string key)
         {
+            Navigation = navigation;
             services = new GameService();
 
-            //lock (services)
-            //{
-            //    Players = services.GetGamePlayers(key);
-            //}
-
-            var gameDBBind = services.GetGameData(key);
+            RoomId = key;
+            var gameDBBind = services.GetGameData(RoomId);
 
             gameDBBind.Subscribe(item =>
             {
@@ -56,28 +58,27 @@ namespace TheMind.ViewModels
                 CheckSeatStatus();
             });
 
-            SeatSelectedCommand = new MvvmHelpers.Commands.Command(this.SeatSelected);
+            StartGameCommand = new MvvmHelpers.Commands.Command(this.StartGame);
         }
 
-        public ICommand SeatSelectedCommand { get; private set; }
+        public ICommand StartGameCommand { get; private set; }
 
-        private async void SeatSelected()
+        private async void StartGame()
         {
-            if (SelectedSeat != null && SelectedSeat.IsSeated == "false")
+            if (AllPlayerSeated)
             {
-
-                string name = await Application.Current.MainPage.DisplayPromptAsync("ALMOST SEATED!!!", "Enter any nickname");
-                if (!string.IsNullOrEmpty(name))
+                if(ViewMode == ViewModeEnum.Board)
                 {
-                    SelectedSeat.IsSeated = "true";
-                    SelectedSeat.NickName = name;
+                    var detailPage = new GamePage();
+                    detailPage.BindingContext = new GamePageViewModel(Navigation, RoomId);
+                    await this.Navigation.PushAsync(detailPage);
                 }
-
-                CheckSeatStatus();
-                //var detailPage = new SelectedRolePage();
-                //detailPage.BindingContext = new SelectedRolePageViewModel(this.Navigation, SelectedRole);
-                //await this.Navigation.PushAsync(detailPage);
-                //SelectedRole = null;
+                else if(ViewMode == ViewModeEnum.Player)
+                {
+                    var detailPage = new PlayerGamePage();
+                    detailPage.BindingContext = new PlayerGamePageViewModel(this.Navigation);
+                    await this.Navigation.PushAsync(detailPage);
+                }
             }
         }
 
