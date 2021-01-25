@@ -15,8 +15,8 @@ namespace TheMind.ViewModels
     {
         GameService services;
 
-        private ObservableCollection<Player> players;
-        public ObservableCollection<Player> Players
+        private List<Player> players;
+        public List<Player> Players
         {
             get => players;
             set => SetProperty(ref players, value);
@@ -41,7 +41,19 @@ namespace TheMind.ViewModels
         public WaitingRoomPageViewModel(INavigation navigation, string key)
         {
             services = new GameService();
-            Players = services.GetGamePlayers(key);
+
+            //lock (services)
+            //{
+            //    Players = services.GetGamePlayers(key);
+            //}
+
+            var gameDBBind = services.GetGameData(key);
+
+            gameDBBind.Subscribe(item =>
+            {
+                var game = ((Game)item.Object);
+                Players = game.Players;
+            });
 
             SeatSelectedCommand = new MvvmHelpers.Commands.Command(this.SeatSelected);
         }
@@ -50,13 +62,13 @@ namespace TheMind.ViewModels
 
         private async void SeatSelected()
         {
-            if (SelectedSeat != null && !SelectedSeat.IsSeated)
+            if (SelectedSeat != null && SelectedSeat.IsSeated == "false")
             {
 
                 string name = await Application.Current.MainPage.DisplayPromptAsync("ALMOST SEATED!!!", "Enter any nickname");
                 if (!string.IsNullOrEmpty(name))
                 {
-                    SelectedSeat.IsSeated = true;
+                    SelectedSeat.IsSeated = "true";
                     SelectedSeat.NickName = name;
                 }
 
@@ -70,7 +82,7 @@ namespace TheMind.ViewModels
 
         private void CheckSeatStatus()
         {
-            AllPlayerSeated = Players.All(player => player.IsSeated);
+            AllPlayerSeated = Players.All(player => player.IsSeated == "true");
         }
     }
 }

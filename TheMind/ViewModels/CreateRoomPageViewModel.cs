@@ -77,6 +77,7 @@ namespace TheMind.ViewModels
                     dummyPlayer.Add(new Player()
                     {
                         Id = Guid.NewGuid(),
+                        IsSeated = "false",
                         NickName = $"Vacant Seat #{i + 1}"
                     });
                 }
@@ -87,7 +88,7 @@ namespace TheMind.ViewModels
 
                 var detailPage = new WaitingRoomPage()
                 {
-                    BindingContext = new WaitingRoomPageViewModel(this.Navigation, gamekey)
+                    BindingContext = new WaitingRoomPageViewModel(this.Navigation, RoomName)//gamekey)
                     {
                         Title = RoomName
                     }

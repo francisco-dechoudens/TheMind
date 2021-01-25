@@ -47,8 +47,8 @@ namespace TheMind.ViewModels
         public async Task StartGameClicked()
         {
             Players = new List<Player>();
-            players.Add(new Player() { NickName = "Francisco", IsSeated = true });
-            players.Add(new Player() { NickName = "Lala", IsSeated = true });
+            players.Add(new Player() { NickName = "Francisco", IsSeated = "true" });
+            players.Add(new Player() { NickName = "Lala", IsSeated = "true" });
 
             Deck = InitDeck(DECKSIZE);
             Deck = Shuffle(Deck);

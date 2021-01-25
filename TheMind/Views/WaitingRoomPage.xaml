@@ -26,7 +26,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                              <StackLayout
+                              <StackLayout 
                                   Margin="5,5"
                                   HeightRequest="100" >
                                     <Frame VerticalOptions="FillAndExpand" HasShadow="False" BackgroundColor="#19FFFFFF" >
@@ -35,18 +35,12 @@
                                             FontSize="Large"
                                             VerticalOptions="CenterAndExpand"
                                             Text="{Binding NickName}" HorizontalOptions="StartAndExpand"/>
-                                            <Button Text="Remove" IsVisible="{Binding IsSeated}" HorizontalOptions="End"/>
                                         </StackLayout>
                                     </Frame>
                                 </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                <ListView.Behaviors>
-                    <behaviors:EventToCommandBehavior EventName="ItemSelected"
-                                                      Command="{Binding SeatSelectedCommand}"
-                                                      Converter="{StaticResource SelectedItemConverter}" />
-                </ListView.Behaviors>
             </ListView>
 
             <Button IsEnabled="{Binding AllPlayerSeated}"

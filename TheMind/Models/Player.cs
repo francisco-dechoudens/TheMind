@@ -11,13 +11,7 @@ namespace TheMind.Models
         }
 
         public Guid Id { get; set; }
-
-        private bool isSeated;
-        public bool IsSeated
-        {
-            get => isSeated;
-            set => SetProperty(ref isSeated, value);
-        }
+        public string IsSeated { get; set; }
 
         private string nickName;
         public string NickName

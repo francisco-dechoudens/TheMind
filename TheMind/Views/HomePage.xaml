@@ -6,12 +6,20 @@
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout Padding="50">
-            <Button VerticalOptions="EndAndExpand"
+
+            <Label  Text='If you are the first one, click "Create Game", that will create a new room and the room code will be shown. Send this code to your friends and enjoy playing together!'
+                    TextColor="White"/>
+
+            <Button VerticalOptions="StartAndExpand"
                     BorderColor="White"
                     BorderWidth="2"
                     TextColor="White"
                     Command="{Binding CreateGameCommand}"
                     Text="Create Game"/>
+
+            <Label Text='If a friend already sent you a code, just click "Join a Game", enter the code and start playing.'
+                    TextColor="White"/>
+
             <Button VerticalOptions="StartAndExpand"
                     BorderColor="White"
                     BorderWidth="2"

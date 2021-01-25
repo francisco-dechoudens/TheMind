@@ -34,10 +34,10 @@ namespace TheMind.ViewModels
 
         private async void JoinGame()
         {
-            //var detailPage = new SelectedRolePage();
-            //detailPage.BindingContext = new SelectedRolePageViewModel(this.Navigation, null);
+            var detailPage = new SearchRoomPage();
+            detailPage.BindingContext = new SearchRoomPageViewModel(this.Navigation);
 
-            //await this.Navigation.PushAsync(detailPage);
+            await this.Navigation.PushAsync(detailPage);
         }
     }
 }
