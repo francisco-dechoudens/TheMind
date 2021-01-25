@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using MvvmHelpers;
 using TheMind.Models;
@@ -42,31 +43,24 @@ namespace TheMind.ViewModels
 
             gameServices = new GameService();
 
-            SearchRoomCommand = new Command(async () => await SearchRoomClicked());
             JoinRoomCommand = new Command(async () => await JoinRoomClicked());
-        }
-
-        public async Task SearchRoomClicked()
-        {
-            var gameDBBind = gameServices.GetGameData(RoomId);
-
-            gameDBBind.Subscribe(item =>
-            {
-                Game = ((Game)item.Object);
-            });
-
-
         }
 
         public async Task JoinRoomClicked()
         {
-            var players = Game.Players;
-            var openSeat = players.FirstOrDefault(p => p.IsSeated == "false");
+            var gameDBBind = gameServices.GetGameData(RoomId);
 
-            openSeat.NickName = nickname;
-            openSeat.IsSeated = "true";
+            var cancelToken = new CancellationTokenSource();
+            gameDBBind.Subscribe(async item =>
+            {
+                Game = ((Game)item.Object);
 
-            await gameServices.UpdateGameState(Game);
+                cancelToken.Cancel(false);
+                cancelToken = new CancellationTokenSource();
+
+                if (!Game.Players.Exists(p => p.NickName == nickname))
+                    await SitPlayer();
+            }, token: cancelToken.Token);
 
             var detailPage = new WaitingRoomPage()
             {
@@ -75,8 +69,16 @@ namespace TheMind.ViewModels
                     Title = RoomId
                 }
             };
-
             await this.Navigation.PushAsync(detailPage);
+        }
+
+        public async Task SitPlayer()
+        {
+            var openSeat = Game.Players.FirstOrDefault(p => p.IsSeated == "false");
+            openSeat.NickName = nickname;
+            openSeat.IsSeated = "true";
+
+            await gameServices.UpdateGameState(Game);
         }
     }
 }

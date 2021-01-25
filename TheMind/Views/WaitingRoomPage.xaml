@@ -21,6 +21,7 @@
                       ItemsSource="{Binding Players}" 
                       HasUnevenRows="True"
                       BackgroundColor="Transparent"
+                      IsEnabled="False"
                       SelectedItem="{Binding SelectedSeat, Mode=TwoWay}"
                       SeparatorVisibility="None">
                 <ListView.ItemTemplate>

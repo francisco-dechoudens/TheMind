@@ -8,13 +8,6 @@
             <StackLayout VerticalOptions="CenterAndExpand">
             <Label Text="Enter a RoomID" TextColor="White"/>
             <Entry Placeholder="#JF93S9" Text="{Binding RoomId}"/>
-            <Button TextColor="White"
-                    BorderColor="White"
-                    BackgroundColor="Transparent"
-                    BorderWidth="2"
-                    Text="Search Room"
-                    Command="{Binding SearchRoomCommand}"/>
-
             <Label Padding="0,20,0,0" Text="Enter a nickname" TextColor="White"/>
             <Entry Placeholder="Nickname" Text="{Binding Nickname}"/>
             <Button TextColor="White"

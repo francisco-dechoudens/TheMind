@@ -6,6 +6,7 @@ using System.Windows.Input;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using TheMind.Models;
+using TheMind.Models.Enums;
 using TheMind.Services;
 using Xamarin.Forms;
 
@@ -37,7 +38,6 @@ namespace TheMind.ViewModels
             set => SetProperty(ref allPlayerSeated, value);
         }
 
-
         public WaitingRoomPageViewModel(INavigation navigation, string key)
         {
             services = new GameService();
@@ -53,6 +53,7 @@ namespace TheMind.ViewModels
             {
                 var game = ((Game)item.Object);
                 Players = game.Players;
+                CheckSeatStatus();
             });
 
             SeatSelectedCommand = new MvvmHelpers.Commands.Command(this.SeatSelected);
