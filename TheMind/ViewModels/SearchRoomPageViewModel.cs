@@ -67,7 +67,8 @@ namespace TheMind.ViewModels
                 BindingContext = new WaitingRoomPageViewModel(this.Navigation, RoomId)
                 {
                     Title = RoomId,
-                    ViewMode = Models.Enums.ViewModeEnum.Player
+                    ViewMode = Models.Enums.ViewModeEnum.Player,
+                    CurrentPlayerNickName = Nickname
                 }
             };
             await this.Navigation.PushAsync(detailPage);

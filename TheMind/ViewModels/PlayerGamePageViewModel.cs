@@ -39,29 +39,20 @@ namespace TheMind.ViewModels
         }
 
 
-        public PlayerGamePageViewModel(INavigation navigation)
+        public PlayerGamePageViewModel(INavigation navigation, string tableName, Player currentPlayer)
         {
             Navigation = navigation;
             services = new PlayerService();
             gameServices = new GameService();
-            SendCardsCommand = new Command(async () => await SendCardToBoard());
+            SendCardsCommand = new Command(async () => await SendCardToBoard(currentPlayer));
 
-
-            //var playerDBBind = services.GetPlayerData("Francisco");
-
-            //playerDBBind.Subscribe(item =>
-            //{
-            //    Player = ((Player)item.Object);
-            //    Cards = Player.CardsInHand;
-            //});
-
-            var gameDBBind = gameServices.GetGameData("Abarca-Table");
+            var gameDBBind = gameServices.GetGameData(tableName);
 
             gameDBBind.Subscribe(item =>
             {
                 Game = ((Game)item.Object);
                 var players = Game.Players;
-                var selectedPlayer = players.Single(p => p.NickName == "Lala");
+                var selectedPlayer = players.Single(p => p.Id == currentPlayer.Id);
 
                 Player = selectedPlayer;
                 Cards = selectedPlayer.CardsInHand;
@@ -70,12 +61,12 @@ namespace TheMind.ViewModels
 
         public Command SendCardsCommand { get; set; }
 
-        public async Task SendCardToBoard()
+        public async Task SendCardToBoard(Player currentPlayer)
         {
             var cardremoved = Player.CardsInHand.LastOrDefault();
             Player.CardsInHand.Remove(cardremoved);
 
-            var selectedPlayer = Game.Players.First(i => i.NickName == "Lala");
+            var selectedPlayer = Game.Players.First(i => i.Id == currentPlayer.Id);
             var index = Game.Players.IndexOf(selectedPlayer);
 
             if (index != -1)

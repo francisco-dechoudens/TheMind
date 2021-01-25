@@ -16,6 +16,7 @@ namespace TheMind.ViewModels
     public class WaitingRoomPageViewModel : BaseViewModel
     {
         private INavigation Navigation;
+        public string CurrentPlayerNickName { get; set; }
         GameService services;
 
         public ViewModeEnum ViewMode { get; set; }
@@ -76,7 +77,7 @@ namespace TheMind.ViewModels
                 else if(ViewMode == ViewModeEnum.Player)
                 {
                     var detailPage = new PlayerGamePage();
-                    detailPage.BindingContext = new PlayerGamePageViewModel(this.Navigation);
+                    detailPage.BindingContext = new PlayerGamePageViewModel(this.Navigation, this.RoomId, Players.First(i => i.NickName == this.CurrentPlayerNickName));
                     await this.Navigation.PushAsync(detailPage);
                 }
             }
