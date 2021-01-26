@@ -48,6 +48,13 @@ namespace TheMind.ViewModels
             {
                 Game = ((Game)item.Object);
                 Cards = Game.PlayedCards;
+
+                if(Game.PlayedCards != null && Game.DealtDeck != null &&
+                   Game.PlayedCards.Count() == Game.DealtDeck.Count())
+                {
+                    Game.Level++;
+                    Cards = new List<Card>();
+                }
             });
         }
         
@@ -55,14 +62,10 @@ namespace TheMind.ViewModels
 
         public async Task StartGameClicked()
         {
-            //Players = new List<Player>();
-            //players.Add(new Player() { NickName = "Francisco", IsSeated = "true" });
-            //players.Add(new Player() { NickName = "Lala", IsSeated = "true" });
-
             Deck = InitDeck(DECKSIZE);
             Deck = Shuffle(Deck);
 
-            await DealCards(Deck, 5);
+            await DealCards(Deck, Game.Level);
         }
 
         public Command DealMoreCardsCommand { get; }

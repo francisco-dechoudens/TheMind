@@ -71,6 +71,7 @@ namespace TheMind.ViewModels
 
                 var game = new Game();
                 game.TableName = RoomName = $"#{RandomString(6)}";
+                game.Level = 1;
 
                 var dummyPlayer = new List<Player>();
                 for(int i=0; i < noPlayer; i++)

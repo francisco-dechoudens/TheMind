@@ -13,5 +13,6 @@ namespace TheMind.Models
         public List<Card> DealtDeck { get; set; }
         public List<Card> PlayedCards { get; set; }
         public List<Player> Players { get; set; }
+        public int Level { get; set; }
     }
 }
